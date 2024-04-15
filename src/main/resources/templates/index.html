@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Retry Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Welcome to the Retry Demo</h1>
+<button id="retryButton">Invoke External Service</button>
+<p id="responseText"></p>
+
+<script>
+        document.getElementById('retryButton').addEventListener('click', function() {
+            $.post("/invokeService", function(data) {
+                document.getElementById('responseText').innerText = data;
+            }).fail(function(response) {
+                document.getElementById('responseText').innerText = "Failed to invoke service. Server error.";
+            });
+        });
+    </script>
+</body>
+</html>
